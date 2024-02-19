@@ -1,4 +1,4 @@
-# MIDI toolbox 1.1 (2016)
+# ECMidiToolbox 1.0 (2024)
 
 ECMidiToolbox is a partial porting of the MIDI Toolbox 1.1. library from MATLAB to Python. Where indicated, the original functions have been modified. Please refer to the original version below for further information.
 
