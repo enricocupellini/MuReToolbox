@@ -10,12 +10,7 @@ MuReToolbox, an acronym for Music Research Toolbox, is a partial porting of the 
 
 - "nmat" (note matrix), table resulting from the MIDI file import it is not used here. Functions here accept single music features like pitches, durations, velocities as input parameters.
 
+- Utilities to process nmat are no needed, therefore a number of function like "dur()", "onset()", "pitch()" are not provided by the present library
+
 - Durational accents according to Parncutt's model, are computed using Inter Onset Intervals (IOIs) while the Matlab MidiToolbox uses 'note duration'.
 
-
-### The following files (features) have been excluded in the current version of the library, whereas they were present in the original version:
-
-| file   | feature provided | 
-| ------ | ------ |
-| dur.m | returns the sequence of durations from the nmat |
-| onset.m | returns the sequence of onsets from the nmat |

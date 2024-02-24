@@ -8,8 +8,8 @@ def ismonophonic(onsets, dur, overlap=0.1):
 	performed for a polyphonic input.
 
 Input argument: 
->>>	ONSETS = sequence of onsets from a given symbolic music source
->>>	DUR =  sequence of durations from the same symbolic music source
+>>>	ONSETS = sequence of onsets from a given music source
+>>>	DUR =  sequence of durations from the same music source
 >>>	OVERLAP (Optional) = Criteria for allowing short overlap between events. The default value is 0.1 seconds
 
 

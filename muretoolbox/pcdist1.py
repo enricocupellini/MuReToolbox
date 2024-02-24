@@ -40,12 +40,12 @@ Output:
 		print(f"{__name__} works only with IOIs array of length greater 0. The IOIs array must have a length one less than the pitches array.")
 		return None
 
-	pc = np.mod(pitches, 12) + 1  # C = 1 etc.
+	pc = np.mod(pitches, 12)  # C = 0 etc.
 	du = duraccent(IOIs)  # IOIs are weighted by Parncutt's durational accent
 
 	pcd = np.zeros(12)
 	for k in range(len(du)):
-		pcd[pc[k] - 1] += du[k]
+		pcd[pc[k]] += du[k]
 
 	pcd[pc[-1]] += np.mean(du) # The durational accent of the last note in the sequence is assigned the mean value of durational accents, as there is no Inter-Onset Interval (IOI) for that note.
 

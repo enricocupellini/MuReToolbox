@@ -45,14 +45,14 @@ Output:
 	# 	print(f"{__name__} works only with monophonic input!")
 	# 	return None
 
-	pc = np.mod(pitches, 12) + 1  # C = 1 etc.
+	pc = np.mod(pitches, 12)  # C = 0 etc.
 	du = duraccent(IOIs)  # IOIs are weighted by Parncutt's durational accent
 	pcd = np.zeros((12, 12))
 
 	for k in range(1, len(du)):
-		pcd[pc[k-1]-1, pc[k]-1] += du[k-1] * du[k]
+		pcd[pc[k-1], pc[k]] += du[k-1] * du[k]
 
-	pcd[pc[-2]-1, pc[-1]-1] += du[-1] * np.mean(du)
+	pcd[pc[-2], pc[-1]] += du[-1] * np.mean(du)
 
 	pcd /= np.sum(pcd + 1e-12)  # normalize
 		
