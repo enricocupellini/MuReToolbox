@@ -1,4 +1,3 @@
-
 import numpy as np
 
 def xcorr(x, *args):
@@ -159,7 +158,7 @@ def vectorXcorr(x, autoFlag, maxlag, *args):
 
 def forceRealCorr(c, x, autoFlag, *args):
     forceReal = False
-    if (np.isreal(x) and autoFlag) or (np.isreal(x) and np.isreal(args[0])):
+    if (np.isreal(x).all() and autoFlag) or (np.isreal(x).all() and np.isreal(args[0]).all()):
         forceReal = True
     if forceReal:
         c = np.real(c)
@@ -550,4 +549,3 @@ def scaleXcorr(c, xIsMatrix, scaleType, autoFlag, M, maxlag, lags, x, *args):
 # end
 
 # % EOF
-

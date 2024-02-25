@@ -1,39 +1,42 @@
 import numpy as np
 
-def onsetfunc(nmat, accfunc=None):
+def onsetfunc(beatOnsets, accValues=None):
     """
-    % Sum of delta functions at onset times weighted by values obtained from ACCFUNC
-% of = onsetfunc(nmat, <accfunc>);
-%
-% Input arguments:
-%	NMAT = note matrix
-%	ACCFUNC (optional) = accent function;
-%
-% Output:
-%	OF = onset function
-%
-% Reference:
-%	Brown, J. (1992). Determination of meter of musical scores by
-%		autocorrelation. Journal of the acoustical society of America, 94 (4), 1953-1957.
-%
-% Comment: Auxiliary function that resides in private directory
-%
-% Change History :
-% Date		Time	Prog	Note
-% 11.8.2002	18:36	PT	Created under MATLAB 5.3 (Macintosh)
-%� Part of the MIDI Toolbox, Copyright � 2004, University of Jyvaskyla, Finland
-% See License.txt
-"""
-    NDIVS = 4  # quattro divisioni per quarto di nota
-    MAXLAG = 8
-    ob = onset(nmat)
+    % Sum of delta functions at onset times weighted by values obtained from ACCVALUES
 
-    if accfunc is not None:
-        acc = accfunc(nmat)
+Input arguments:
+>>> beatOnsets = sequence of note onsets measured in beat fractions
+>>> accValues = values to weight the received onsets. If None each onset has the same weight
+    accValues must be a function of beatOnset and must have the same number of elements of it
+    >>> *** original library paramenter: ACCFUNC (optional) = accent function; ***
+
+Output:
+	OF = onset function
+
+    Reference:
+	Brown, J. (1992). Determination of meter of musical scores by
+		autocorrelation. Journal of the acoustical society of America, 94 (4), 1953-1957.
+
+    Comment: Auxiliary function that resides in private directory
+
+    Change History :
+    Date		Time	Prog	Note
+    11.8.2002	18:36	PT	Created under MATLAB 5.3 (Macintosh)
+    © Part of the MIDI Toolbox, Copyright © 2004, University of Jyvaskyla, Finland
+    See License.txt
+"""
+    NDIVS = 4  
+    MAXLAG = 8
+    ob = [float(x) for x in beatOnsets]
+    ob = np.asarray(ob)
+
+    if accValues is not None:
+        acc = np.asarray(accValues)
+        acc = [float(x) for x in acc]
     else:
         acc = np.ones(len(ob))
 
-    vlen = NDIVS * max([2 * MAXLAG, np.ceil(max(ob)) + 1])
+    vlen = NDIVS * max([2 * MAXLAG, int(np.ceil(max(ob)))])
     of = np.zeros(vlen)
     ind = np.mod(np.round(ob * NDIVS), len(of)).astype(int)
     for k in range(len(ind)):

@@ -1,4 +1,4 @@
-from xcorr import xcorr
+# from xcorr import xcorr
 
 import numpy as np
 
@@ -6,6 +6,7 @@ def ofacorr(of):
     MAXLAG = 8
     NDIVS = 4
     actmp = np.correlate(of, of, mode='full')
+    # actmp = xcorr(of)
     ind1 = (len(actmp) + 1) // 2
     ind2 = min(len(actmp), ind1 + MAXLAG * NDIVS)
     ac = np.zeros(MAXLAG * NDIVS + 1)
