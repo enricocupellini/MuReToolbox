@@ -1,4 +1,5 @@
 import numpy as np
+from fractions import Fraction
 
 def durdist1(beatDurations):
 	"""
@@ -34,6 +35,7 @@ Output:
 	if not beatDurations:
 		return None
     
+	beatDurations = [float(x) if isinstance(x, Fraction) else x for x in beatDurations]
 	du = np.asarray(beatDurations)
 	du = du[du > 0]  # Remove zero durations
 	du = np.round(2 * np.log2(du))  # Take logarithms & categorize
