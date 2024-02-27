@@ -1,4 +1,4 @@
-def ismonophonic(onsets, dur, overlap=0.1):
+def ismonophonic(onsets, durations, overlap=0.1):
 	"""
 	Returns 1 if monophonic sequence (logical function)
 
@@ -9,7 +9,7 @@ def ismonophonic(onsets, dur, overlap=0.1):
 
 Input argument: 
 >>>	ONSETS = sequence of onsets from a given music source
->>>	DUR =  sequence of durations from the same music source
+>>>	DURATIONS =  sequence of durations from the same music source
 >>>	OVERLAP (Optional) = Criteria for allowing short overlap between events. The default value is 0.1 seconds
 
 
@@ -23,13 +23,13 @@ Output:
 	See License.txt
 	"""
 
-	if  len(onsets) != len(dur):
+	if  len(onsets) != len(durations):
 		return "mismatch number of elements" #None
 	
 	l = 1
 	c = []
 	for i in range(1, len(onsets)):
-		c.append(onsets[i] - (onsets[i-1] + dur[i-1]))
+		c.append(onsets[i] - (onsets[i-1] + durations[i-1]))
 		if c[i-1] < -overlap:
 			l = 0
 

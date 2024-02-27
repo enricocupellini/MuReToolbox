@@ -6,6 +6,9 @@ def tonality(pitches, IOIs):
 	"""
 	Tonal stability of notes in melody
 
+!** tonality function in the MIDI toolbox can be used to assign these values to note events 
+	assuming the key is in C major or C minor  **!
+
 	Function gives the tonal stability ratings for tones in the melody 
 	after determining the key mode (minor/major) using the KEYMODE 
 	function.

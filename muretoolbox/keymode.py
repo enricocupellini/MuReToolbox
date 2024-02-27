@@ -4,6 +4,8 @@ def keymode(pitches, IOIs):
     """
     Mode (major vs. minor) estimation
 
+!** keymode function assumes the key is in C major or C minor  **!
+
 	Functions estimates the key mode (1=major, 2=minor) based on 
 	Krumhansl-Kessler key finding algorithm and pitch distribution.
 	This function is used to assign TONALITY values to the input sequence.
@@ -31,9 +33,9 @@ Output:
     if not pitches or not IOIs:
         return
 
-    u = kkcc(pitches, IOIs)
-    major = u[0]
-    minor = u[12]
+    u = kkcc(pitches, IOIs) # 24 keys matrix
+    major = u[0]            # C major
+    minor = u[12]           # C minor
 
     if major > minor:
         return 1

@@ -2,7 +2,7 @@ import numpy as np
 from ismonophonic import ismonophonic
 from duraccent import duraccent
 
-def pcdist2(pitches, IOIs):
+def pcdist2(pitches, IOIs, onsets = None, durations = None):
 
 	"""
 	2nd order pitch-class distribution
@@ -21,6 +21,9 @@ def pcdist2(pitches, IOIs):
 Input argument:
 >>>	pitches = array of midi pitches
 >>>	IOIs = array of the input pitches' inter onset intervals in seconds. It must have the same length as pitches array minus one
+>>>	ONSETS (optional)= sequence of onsets from a given music source
+>>>	DUR (optional) = sequence of durations from the same music source
+	if optional arguments are present you choose to work only with monophonic input (mirroring the behavior of the original library)
 
 Output:
 	PCD = 2nd order pitch-class distribution of the input sequence
@@ -41,9 +44,10 @@ Output:
 		print(f"{__name__} works only with IOIs array of length greater 0. The IOIs array must have a length one less than the pitches array.")
 		return None
 
-	# if not ismonophonic(nmat):
-	# 	print(f"{__name__} works only with monophonic input!")
-	# 	return None
+	if onsets and durations:
+		if not ismonophonic(onsets, durations):
+			print(f"monophonic control activated by optional arguments has detected that the input is not monophonic!")
+			return None
 
 	pc = np.mod(pitches, 12)  # C = 0 etc.
 	du = duraccent(IOIs)  # IOIs are weighted by Parncutt's durational accent
